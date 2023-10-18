@@ -66,6 +66,12 @@ export function handleApplicationErrors(
     return res.status(httpStatus.FORBIDDEN).send(err.message);
   }
 
+  if (err.name === 'TicketAlreadyExistsError') {
+    return res.status(httpStatus.CONFLICT).send({
+      message: err.message,
+    });
+  }
+
   if (err.hasOwnProperty('status') && err.name === 'RequestError') {
     return res.status((err as RequestError).status).send({
       message: err.message,
