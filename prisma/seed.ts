@@ -10,11 +10,11 @@ async function clearDatabase() {
   await prisma.enrollment.deleteMany({});
   await prisma.room.deleteMany({});
   await prisma.booking.deleteMany({});
+  await prisma.session.deleteMany({});
   await prisma.user.deleteMany({});
   await prisma.ticketType.deleteMany({});
   await prisma.hotel.deleteMany({});
   await prisma.event.deleteMany({});
-  await prisma.session.deleteMany({});
   console.log("Database cleared.");
 }
 

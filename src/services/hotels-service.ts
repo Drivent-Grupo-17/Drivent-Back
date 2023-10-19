@@ -22,8 +22,28 @@ async function getHotels(userId: number) {
 
   const hotels = await hotelRepository.findHotels();
   if (hotels.length === 0) throw notFoundError();
+  const capacity = await hotelRepository.sumCapacity();
+  console.log(hotels[0].Rooms);
+  const hotelsInfo = hotels.map((element, index) => {
+    let count = 0;
+    element.Rooms.forEach((element) => {
+      if (element.Booking.length === 0) {
+      } else {
+        count++;
+      }
+    });
+    return {
+      id: element.id,
+      name: element.name,
+      image: element.image,
+      createdAt: element.createdAt,
+      updatedAt: element.updatedAt,
+      bookings: count,
+      capacity: capacity[index]._sum.capacity,
+    };
+  });
 
-  return hotels;
+  return hotelsInfo;
 }
 
 async function getHotelsWithRooms(userId: number, hotelId: number) {
