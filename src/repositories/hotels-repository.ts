@@ -8,7 +8,7 @@ async function findHotels() {
       image: true,
       createdAt: true,
       updatedAt: true,
-      Rooms: { select: { Booking: true } },
+      Rooms: { select: { capacity: true, Booking: true } },
     },
     orderBy: { id: 'asc' },
   });

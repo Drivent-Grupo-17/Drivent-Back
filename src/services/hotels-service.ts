@@ -26,9 +26,13 @@ async function getHotels(userId: number) {
   console.log(hotels[0].Rooms);
   const hotelsInfo = hotels.map((element, index) => {
     let count = 0;
+    let roomCapacityMax = 1;
     element.Rooms.forEach((element) => {
+      if (element.capacity > roomCapacityMax) {
+        roomCapacityMax = element.capacity;
+      }
       if (element.Booking.length === 0) {
-      } else {
+      } else if (element.Booking.length > 0) {
         count++;
       }
     });
@@ -38,6 +42,7 @@ async function getHotels(userId: number) {
       image: element.image,
       createdAt: element.createdAt,
       updatedAt: element.updatedAt,
+      accommodationMax: roomCapacityMax,
       bookings: count,
       capacity: capacity[index]._sum.capacity,
     };
