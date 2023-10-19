@@ -3,23 +3,10 @@ import { PrismaClient } from "@prisma/client";
 import dayjs from "dayjs";
 const prisma = new PrismaClient();
 
-async function clearDatabase() {
-  await prisma.address.deleteMany({});
-  await prisma.payment.deleteMany({});
-  await prisma.ticket.deleteMany({});
-  await prisma.enrollment.deleteMany({});
-  await prisma.room.deleteMany({});
-  await prisma.booking.deleteMany({});
-  await prisma.user.deleteMany({});
-  await prisma.ticketType.deleteMany({});
-  await prisma.hotel.deleteMany({});
-  await prisma.event.deleteMany({});
-  await prisma.session.deleteMany({});
-  console.log("Database cleared.");
-}
+
 
 async function main() {
-  await clearDatabase();
+
   let event = await prisma.event.findFirst();
   if (!event) {
     event = await prisma.event.create({
