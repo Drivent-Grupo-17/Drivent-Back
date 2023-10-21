@@ -33,7 +33,7 @@ async function getHotels(userId: number) {
       }
       if (element.Booking.length === 0) {
       } else if (element.Booking.length > 0) {
-        count++;
+        count += element.Booking.length;
       }
     });
     return {
@@ -58,7 +58,6 @@ async function getHotelsWithRooms(userId: number, hotelId: number) {
 
   const hotelWithRooms = await hotelRepository.findRoomsByHotelId(hotelId);
   if (!hotelWithRooms) throw notFoundError();
-
   return hotelWithRooms;
 }
 
