@@ -19,4 +19,11 @@ async function validateUserActivity(userId: number) {
   }
 }
 
-export const activityService = { get };
+async function create(userId: number, activityId: number) {
+  await validateUserActivity(userId);
+
+  await activityRepository.create(userId, activityId);
+  return;
+}
+
+export const activityService = { get, create };

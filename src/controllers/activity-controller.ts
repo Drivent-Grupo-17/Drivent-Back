@@ -10,4 +10,12 @@ async function get(req: AuthenticatedRequest, res: Response) {
   res.status(httpStatus.OK).send(response);
 }
 
-export const activityController = { get };
+async function create(req: AuthenticatedRequest, res: Response) {
+  const { userId } = req;
+  const activityId: number = req.body;
+
+  await activityService.create(userId, activityId);
+  res.status(httpStatus.CREATED).send('Activity registered');
+}
+
+export const activityController = { get, create };

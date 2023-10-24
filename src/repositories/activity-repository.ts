@@ -9,4 +9,13 @@ async function get(userId: number) {
   return response;
 }
 
-export const activityRepository = { get };
+async function create(userId: number, activityId: number) {
+  return await prisma.subscription.create({
+    data: {
+      userId,
+      activityId,
+    },
+  });
+}
+
+export const activityRepository = { get, create };
