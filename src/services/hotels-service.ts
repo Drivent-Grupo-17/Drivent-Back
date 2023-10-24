@@ -15,6 +15,8 @@ async function validateUserBooking(userId: number) {
   if (ticket.status === TicketStatus.RESERVED || type.isRemote || !type.includesHotel) {
     throw cannotListHotelsError();
   }
+
+  return type;
 }
 
 async function getHotels(userId: number) {
@@ -64,4 +66,5 @@ async function getHotelsWithRooms(userId: number, hotelId: number) {
 export const hotelsService = {
   getHotels,
   getHotelsWithRooms,
+  validateUserBooking,
 };
