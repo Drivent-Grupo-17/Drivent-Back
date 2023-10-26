@@ -60,3 +60,8 @@ export type UpdateBookingParams = Omit<Booking, 'createdAt' | 'updatedAt'>;
 export type CreateSubscription = {
   activityId: number;
 };
+
+export type DaysObject = {
+  startsAt: string;
+  day: string;
+}[];
