@@ -2,11 +2,15 @@ import { bookingRepository } from '@/repositories';
 import { hotelsService } from './hotels-service';
 import { canNotListActivities } from '@/errors/cannot-list-activities';
 import { activityRepository } from '@/repositories/activity-repository';
+import { DaysObject } from '@/protocols';
 
-async function get(userId: number) {
+async function get(userId: number, date: any) {
   validateUserActivity(userId);
+  const dateCorrect = new Date(date);
+  const dateObj = new Date(date);
+  dateObj.setDate(dateObj.getDate() + 1);
 
-  const response = await activityRepository.get(userId);
+  const response = await activityRepository.get(userId, dateCorrect, dateObj);
   return response;
 }
 
@@ -26,4 +30,45 @@ async function create(userId: number, activityId: number) {
   return;
 }
 
-export const activityService = { get, create };
+async function getDays(userId: number) {
+  await validateUserActivity(userId);
+  const daysOfWeek = [
+    'Domingo',
+    'Segunda-feira',
+    'Terça-feira',
+    'Quarta-feira',
+    'Quinta-feira',
+    'Sexta-feira',
+    'Sábado',
+  ];
+
+  const response = await activityRepository.getDays();
+  const days: DaysObject = response.map((element) => {
+    const date = new Date(element.startsAt);
+    const day = date.getDay();
+    return {
+      startsAt: element.startsAt.toISOString().split('T')[0],
+      day: daysOfWeek[day],
+    };
+  });
+
+  const daysFiltered = filterDays(days);
+
+  return daysFiltered;
+}
+
+function filterDays(days: DaysObject) {
+  const set = new Set();
+  return days.filter((element) => {
+    const key = `${element.day}-${element.startsAt}`;
+
+    if (!set.has(key)) {
+      set.add(key);
+      return true;
+    }
+
+    return false;
+  });
+}
+
+export const activityService = { get, create, getDays };
