@@ -7,7 +7,7 @@ const activityRouter = Router();
 
 activityRouter
   .all('/*', authenticateToken)
-  .get('/:date', activityController.get)
+  .get('/', activityController.get)
   .get('/days', authenticateToken, activityController.getDays)
   .post('/', validateBody(activitySchema), activityController.create);
 

@@ -6,7 +6,7 @@ import httpStatus from 'http-status';
 
 async function get(req: AuthenticatedRequest, res: Response) {
   const { userId } = req;
-  const date: string = req.params.date;
+  const date = req.query.date
   if (!date) {
     throw requestError(400, 'Bad Request');
   }

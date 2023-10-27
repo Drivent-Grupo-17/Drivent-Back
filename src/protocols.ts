@@ -65,3 +65,17 @@ export type DaysObject = {
   startsAt: string;
   day: string;
 }[];
+
+export enum LocationActivity {
+  Principal = 'Auditório Principal',
+  Lateral = 'Auditório Lateral',
+  Workshop = 'Sala de Workshop',
+}
+
+export type ActivitySeed = {
+  name: string;
+  location: string;
+  capacity: number;
+  startsAt: Date;
+  endsAt: Date;
+}[];

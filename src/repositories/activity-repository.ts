@@ -1,6 +1,6 @@
 import { prisma } from '@/config';
 
-async function get(userId: number, date: string, dateMoreOneDay: string) {
+async function get(userId: number, date: Date, dateMoreOneDay: Date) {
   const response = await prisma.activity.findMany({
     orderBy: { startsAt: 'asc' },
     where: { startsAt: { gte: date, lte: dateMoreOneDay } },

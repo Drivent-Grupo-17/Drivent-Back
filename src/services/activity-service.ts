@@ -4,13 +4,13 @@ import { canNotListActivities } from '@/errors/cannot-list-activities';
 import { activityRepository } from '@/repositories/activity-repository';
 import { DaysObject } from '@/protocols';
 
-async function get(userId: number, date: string) {
+async function get(userId: number, date: any) {
   validateUserActivity(userId);
+  const dateCorrect = new Date(date);
   const dateObj = new Date(date);
   dateObj.setDate(dateObj.getDate() + 1);
-  const dateMoreOneDay = dateObj.toISOString();
 
-  const response = await activityRepository.get(userId, date, dateMoreOneDay);
+  const response = await activityRepository.get(userId, dateCorrect, dateObj);
   return response;
 }
 
@@ -52,11 +52,23 @@ async function getDays(userId: number) {
     };
   });
 
-  const daysFiltered: DaysObject = days.filter((element, index, self) => {
-    return self.indexOf(element) === index;
-  });
+  const daysFiltered = filterDays(days);
 
   return daysFiltered;
+}
+
+function filterDays(days: DaysObject) {
+  const set = new Set();
+  return days.filter((element) => {
+    const key = `${element.day}-${element.startsAt}`;
+
+    if (!set.has(key)) {
+      set.add(key);
+      return true;
+    }
+
+    return false;
+  });
 }
 
 export const activityService = { get, create, getDays };
