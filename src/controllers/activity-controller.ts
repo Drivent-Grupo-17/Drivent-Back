@@ -1,23 +1,23 @@
+import { Response } from 'express';
+import httpStatus from 'http-status';
 import { requestError } from '@/errors';
 import { AuthenticatedRequest } from '@/middlewares';
 import { activityService } from '@/services/activity-service';
-import { Response } from 'express';
-import httpStatus from 'http-status';
 
 async function get(req: AuthenticatedRequest, res: Response) {
   const { userId } = req;
-  const date = req.query.date
+  const date = req.query.date;
   if (!date) {
     throw requestError(400, 'Bad Request');
   }
-
+  console.log(date);
   const response = await activityService.get(userId, date);
   res.status(httpStatus.OK).send(response);
 }
 
 async function create(req: AuthenticatedRequest, res: Response) {
   const { userId } = req;
-  const activityId: number = req.body;
+  const { activityId } = req.body;
 
   await activityService.create(userId, activityId);
   res.status(httpStatus.CREATED).send('Activity registered');
