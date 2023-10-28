@@ -1,7 +1,7 @@
+import { Router } from 'express';
 import { activityController } from '@/controllers/activity-controller';
 import { authenticateToken, validateBody } from '@/middlewares';
 import { activitySchema } from '@/schemas/activity-schema';
-import { Router } from 'express';
 
 const activityRouter = Router();
 

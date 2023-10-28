@@ -2,6 +2,7 @@ import 'reflect-metadata';
 import 'express-async-errors';
 import express, { Express } from 'express';
 import cors from 'cors';
+import { activityRouter } from './routers/activity-router';
 import { handleApplicationErrors } from '@/middlewares';
 import {
   usersRouter,
@@ -14,7 +15,6 @@ import {
   bookingRouter,
 } from '@/routers';
 import { loadEnv, connectDb, disconnectDB } from '@/config';
-import { activityRouter } from './routers/activity-router';
 
 loadEnv();
 

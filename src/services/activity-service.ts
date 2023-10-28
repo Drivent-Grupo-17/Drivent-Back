@@ -1,5 +1,5 @@
-import { bookingRepository } from '@/repositories';
 import { hotelsService } from './hotels-service';
+import { bookingRepository } from '@/repositories';
 import { canNotListActivities } from '@/errors/cannot-list-activities';
 import { activityRepository } from '@/repositories/activity-repository';
 import { DaysObject } from '@/protocols';
