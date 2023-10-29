@@ -1,5 +1,5 @@
-import { faker } from '@faker-js/faker';
-import { Activity, PrismaClient } from '@prisma/client';
+
+import { PrismaClient } from '@prisma/client';
 import dayjs from 'dayjs';
 const prisma = new PrismaClient();
 import { ActivitySeed, LocationActivity } from '../src/protocols';
@@ -139,8 +139,8 @@ async function main() {
   const activitiesPrincipal = generateActivities(
     ['Jogar minecraft', 'Jogar lol', 'Jogar CS'],
     LocationActivity.Principal,
-    ['2023-10-27T09:00:00', '2023-10-27T13:00:00', '2023-10-28T18:00:00'],
-    ['2023-10-27T10:00:00', '2023-10-27T14:30:00', '2023-10-28T20:00:00'],
+    ['2023-10-28T09:00:00', '2023-10-28T13:00:00', '2023-10-29T18:00:00'],
+    ['2023-10-28T10:00:00', '2023-10-28T14:30:00', '2023-10-29T20:00:00'],
     10,
   );
   console.log(activitiesPrincipal);
@@ -151,8 +151,8 @@ async function main() {
   const activitiesLateral = generateActivities(
     ['Aula de cozinha', 'Aula de futebol', 'Aula de videogame'],
     LocationActivity.Lateral,
-    ['2023-10-27T09:00:00', '2023-10-27T13:00:00', '2023-10-28T18:00:00'],
-    ['2023-10-27T10:00:00', '2023-10-27T14:30:00', '2023-10-28T20:00:00'],
+    ['2023-10-28T09:00:00', '2023-10-28T13:00:00', '2023-10-29T18:00:00'],
+    ['2023-10-28T10:00:00', '2023-10-28T14:30:00', '2023-10-29T20:00:00'],
     12,
   );
   await prisma.activity.createMany({
@@ -162,8 +162,8 @@ async function main() {
   const activitiesWorkshop = generateActivities(
     ['Palestra x', 'Palestra y', 'Palestra z'],
     LocationActivity.Workshop,
-    ['2023-10-27T09:00:00', '2023-10-27T13:00:00', '2023-10-28T18:00:00'],
-    ['2023-10-27T10:00:00', '2023-10-27T14:30:00', '2023-10-28T20:00:00'],
+    ['2023-10-28T09:00:00', '2023-10-28T13:00:00', '2023-10-29T18:00:00'],
+    ['2023-10-28T10:00:00', '2023-10-28T14:30:00', '2023-10-29T20:00:00'],
     15,
   );
   await prisma.activity.createMany({

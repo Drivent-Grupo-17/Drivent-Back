@@ -11,6 +11,7 @@ async function get(userId: number, date: Date, dateMoreOneDay: Date) {
 }
 
 async function create(userId: number, activityId: number) {
+  console.log(activityId);
   return await prisma.subscription.create({
     data: {
       userId,
